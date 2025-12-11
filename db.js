@@ -1,0 +1,26 @@
+import mongoose from "mongoose";
+
+const mongoURL = process.env.MONGO_URL || "mongodb://localhost:27017/hotel";
+
+// Connect to MongoDB
+mongoose.connect(mongoURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+// Handle connection events
+const db = mongoose.connection;
+
+db.on("connected", () => {
+    console.log("MongoDB connected successfully");
+});
+
+db.on("disconnected", () => {
+    console.log("MongoDB disconnected");
+});
+
+db.on("error", (err) => {
+    console.log("MongoDB connection error:", err);
+});
+
+export default db;
