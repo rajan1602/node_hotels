@@ -6,7 +6,10 @@ dotenv.config();
 const mongoURL = process.env.MONGODBURL || "mongodb://localhost:27017/hotel"; 
 
 // Connect to MongoDB
-mongoose.connect(mongoURL)
+mongoose.connect(mongoURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 // Handle connection events
 const db = mongoose.connection;
 
